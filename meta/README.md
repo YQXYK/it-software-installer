@@ -54,8 +54,8 @@
 
 ### 安装后的特殊步骤
 
-- **MySQL**：MSI 仅安装 Server 本体，需手动运行配套 **MySQL Configurator** 完成实例配置。新手请对照 [《MySQL 配置向导小白指南》](./docs/mysql-config-guide.md) 操作。
-- **Watt Toolkit**：官方安装器不支持静默安装，技能会启动图形向导，请对照 [《Watt Toolkit 安装指引》](./docs/watt-toolkit-install-guide.md) 手动完成。网络加速功能无需登录即可使用（部分高级功能才需登录）。
+- **MySQL**：MSI 仅安装 Server 本体，需手动运行配套 **MySQL Configurator** 完成实例配置。新手请对照 [《MySQL 配置向导小白指南》](../docs/mysql-config-guide.md) 操作。
+- **Watt Toolkit**：官方安装器不支持静默安装，技能会启动图形向导，请对照 [《Watt Toolkit 安装指引》](../docs/watt-toolkit-install-guide.md) 手动完成。网络加速功能无需登录即可使用（部分高级功能才需登录）。
 
 ## 自动版本检测策略
 
@@ -74,12 +74,14 @@
 it-software-installer/
 ├── SKILL.md                      # 技能定义与使用说明
 ├── software-config.json          # 软件列表与安装配置（可自定义）
-├── CHANGELOG.md                  # 更新日志
-├── README.md                     # 本文件
-├── LICENSE                       # 开源许可（MIT）
-└── docs/
-    ├── mysql-config-guide.md     # MySQL 配置向导小白指南
-    └── watt-toolkit-install-guide.md  # Watt Toolkit 安装指引
+├── .gitignore
+├── docs/
+│   ├── mysql-config-guide.md     # MySQL 配置向导小白指南
+│   └── watt-toolkit-install-guide.md  # Watt Toolkit 安装指引
+└── meta/
+    ├── README.md                 # 开源说明（本文件）
+    ├── CHANGELOG.md              # 更新日志
+    └── LICENSE                   # 开源许可（MIT）
 ```
 
 ## 配置说明
