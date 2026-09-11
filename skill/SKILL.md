@@ -2,10 +2,10 @@
 name: it-software-installer
 display_name: IT常用软件一键安装
 display_name_en: IT Software One-Click Installer
-description: "IT常用软件一键安装：批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、TraeCode、TraeWork等常用工具，自动获取最新版本并检测已安装软件，支持并发安装。当用户需要批量安装常用软件或配置开发环境时调用。"
-description_zh: "IT常用软件一键安装：自动获取最新版本，检测已装软件，批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、TraeCode、TraeWork等常用工具，支持并发安装，快速完成开发环境配置。"
-description_en: "One-click installer for common IT software. Automatically fetches the latest versions, detects already-installed programs, and batch-installs Chrome, Node.js, Git, Visual Studio Code, MySQL Server, Watt Toolkit, TraeCode and TraeWork with concurrent downloads. Use when users need to install common software in bulk or set up a development environment."
-version: 1.8.3
+description: "IT常用软件一键安装：批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、Typora、TraeCode、TraeWork等常用工具，自动获取最新版本并检测已安装软件，支持并发安装。当用户需要批量安装常用软件或配置开发环境时调用。"
+description_zh: "IT常用软件一键安装：自动获取最新版本，检测已装软件，批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、Typora、TraeCode、TraeWork等常用工具，支持并发安装，快速完成开发环境配置。"
+description_en: "One-click installer for common IT software. Automatically fetches the latest versions, detects already-installed programs, and batch-installs Chrome, Node.js, Git, Visual Studio Code, MySQL Server, Watt Toolkit, Typora, TraeCode and TraeWork with concurrent downloads. Use when users need to install common software in bulk or set up a development environment."
+version: 1.9.0
 author: 雨轻霄
 category: 工具
 platforms: [WorkBuddy, TraeWork]
@@ -29,7 +29,7 @@ platforms: [WorkBuddy, TraeWork]
 
 ## 包含的软件
 
-当前预置以下 9 款常用软件（可在配置文件中自定义增删）：
+当前预置以下 10 款常用软件（可在配置文件中自定义增删）：
 
 | 软件 | 说明 | 版本获取方式 | 安装方式 | 安装路径 | 发行渠道 |
 |------|------|-------------|----------|----------|----------|
@@ -42,8 +42,14 @@ platforms: [WorkBuddy, TraeWork]
 | **TraeWork** | AI 工作助手 | 自动获取（官方重定向） | 用户安装版 | `%LOCALAPPDATA%\Programs\TRAE SOLO CN` | 国内版 / 国际版 |
 | **Everything** | 文件秒搜工具（voidtools） | 自动获取（官网页面解析） | 系统安装版 | `C:\Program Files\Everything` | - |
 | **Watt Toolkit** | 网络加速工具箱（原 Steam++） | 固定稳定版 3.1.0（GitHub latest 接口返回候选版） | 系统安装版 | `C:\Program Files\Steam++`（可自定义） | - |
+| **Typora** | Markdown 编辑器 | 默认免费版 0.9.98（可选最新付费版/指定版本） | 用户安装版 | `C:\Program Files\Typora`（可自定义） | 版本选项 |
 
 > Trae 系列为 Electron 应用，官方仅提供用户安装版（安装到用户目录），支持静默自动更新，使用体验更佳。
+
+> **💡 Typora 特别说明**：Typora 官方已转为付费授权制，其免费版固定在旧版本。本技能**默认安装官方最后可免费直接使用的旧版 0.9.98**（而不是最新版）。安装时会明确询问用户装哪种：
+> - **A. 免费版（默认）**：旧版 0.9.98，可直接使用，但**不能联网更新**（更新会变成付费版/提示付费）；
+> - **B. 最新版（付费）**：需购买授权，仅 14 天试用，试用结束需付费；
+> - **指定版本**：用户可指定任意历史版本号，但需自查该版本能否正常打开（部分版本如 0.11.18 需配注册表校验规避过期提示）。
 
 ## 何时调用
 
@@ -63,6 +69,8 @@ platforms: [WorkBuddy, TraeWork]
 | `nodejs-api` | 通过 Node.js 官方 API 查询最新 LTS 版本 | Node.js |
 | `github-release` | 通过 GitHub Releases API 查询最新发布版本 | Git for Windows |
 | `page-regex` | 解析官网下载页，正则提取最新版本号后拼接下载地址 | Everything |
+
+> **Typora 特别说明**：Typora 官方已转为付费授权制、无公开版本 API，故采用 `fixed-url` 固定下载地址 + **版本选项（versionChoices）**机制，由用户安装时选择"免费版 / 最新版 / 指定版本"，不自动检测版本。默认免费版为官方最后可免费直接使用的旧版 0.9.98。
 
 > **MySQL 特别说明**：MySQL 8.0 后官网停止提供 MySQL Installer，本技能使用官方独立的 **MySQL Community Server MSI** 直链（固定官方最新 LTS 9.7 版，因 CDN 主版本目录无法由完整版本号推导，采用手动更新而非自动检测）。MSI 只安装 Server 本体，**不会自动启动服务**，安装完成后需手动运行配套的 MySQL Configurator 完成实例初始化（设置 root 密码、注册 Windows 服务、配置端口）。
 
@@ -102,7 +110,11 @@ platforms: [WorkBuddy, TraeWork]
 | hasChannels | boolean | 是否有多个发行渠道（如国内版/国际版），可选 |
 | defaultChannel | string | 默认渠道标识，hasChannels 为 true 时必填 |
 | channels | object | 各渠道配置，hasChannels 为 true 时必填（见下方说明） |
+| hasVersionChoices | boolean | 是否有多个版本选项（如免费版/最新版），可选 |
+| defaultVersionChoice | string | 默认版本选项标识，hasVersionChoices 为 true 时必填 |
+| versionChoices | object | 各版本选项配置，hasVersionChoices 为 true 时必填（见下方说明） |
 | downloadUrl | string | 默认下载地址（版本检测失败时的回退） |
+| backupUrl | string | 可选，备用下载地址（downloadUrl 下载失败时的回退） |
 | installerType | string | msi / exe |
 | installArgs | array | 静默安装参数 |
 | checkPaths | array | 检测是否已安装的路径（支持环境变量如 %LOCALAPPDATA%） |
@@ -192,6 +204,43 @@ platforms: [WorkBuddy, TraeWork]
 
 用户选择渠道后，使用对应渠道的 `downloadUrl` 和 `checkPaths` 覆盖软件的默认配置。
 
+### versionChoices 版本选项配置
+
+当 `hasVersionChoices` 为 `true` 时，通过 `versionChoices` 配置多个版本选项（主要用于**默认非最新版**的软件，如 Typora 默认免费旧版、可选最新付费版）：
+
+```json
+{
+  "hasVersionChoices": true,
+  "defaultVersionChoice": "free",
+  "versionChoices": {
+    "free": {
+      "label": "免费版（0.9.98，旧版，默认）",
+      "version": "0.9.98",
+      "note": "免费旧版，不能联网更新（更新会变成付费版/提示付费）",
+      "downloadUrl": "https://download.typora.io/windows/typora-update-x64-1213.exe",
+      "backupUrl": ""
+    },
+    "latest": {
+      "label": "最新版（付费，需购买授权，仅 14 天试用）",
+      "version": "latest",
+      "note": "最新正式版本，付费授权制，默认 14 天试用",
+      "downloadUrl": "https://download.typora.io/windows/typora-setup-x64.exe",
+      "backupUrl": "https://typora.io/"
+    }
+  }
+}
+```
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| label | string | 版本选项显示名称（务必说明是否为免费/付费/试用） |
+| version | string | 该选项对应的版本号或策略（如 "0.9.98" / "latest"） |
+| note | string | 该版本的说明（免费/付费、能否更新、注意事项等） |
+| downloadUrl | string | 该版本对应的下载地址 |
+| backupUrl | string | 可选，该版本的备用下载地址 |
+
+**注意**：对于 `hasVersionChoices` 的软件，**安装前必须明确询问用户选择哪个版本**，并在询问时把每个选项的付费/免费性质、能否更新讲清楚（尤其是"默认免费版是旧版、最新版要钱"这类）。默认使用 `defaultVersionChoice` 指向的版本。用户也可要求指定该软件允许范围内的任意历史版本。
+
 ### desktopShortcut 桌面快捷方式配置
 
 配置了 `desktopShortcut` 的软件，安装完成后会自动检查桌面快捷方式是否存在，不存在则自动创建。
@@ -259,7 +308,8 @@ platforms: [WorkBuddy, TraeWork]
 
 **选项 A — 全部按默认**：
 - 所有软件使用默认版本策略和默认渠道
-- 直接进入第 3 步
+- 若其中包含 `hasVersionChoices: true` 的软件（如 Typora），**仍需单独询问该软件的版本选项**（见下文"多版本选项软件说明"）
+- 其余软件直接进入第 3 步
 
 **选项 B — 调整版本/渠道**：
 - 进一步询问："你要调整哪个软件？（输入序号或名称）"
@@ -285,6 +335,17 @@ platforms: [WorkBuddy, TraeWork]
 - `channels` 对象中每个渠道包含：`label`（显示名称）、`downloadUrl`（下载地址）、`checkPaths`（安装检测路径）
 - 用户选择渠道后，使用对应渠道的配置覆盖默认的 `downloadUrl` 和 `checkPaths`
 
+**多版本选项软件说明（hasVersionChoices）：**
+- 配置中 `hasVersionChoices: true` 的软件（如 Typora）提供多个版本选项，**安装前必须明确询问用户选择哪个版本**
+- `defaultVersionChoice` 指定默认版本选项（通常为免费版/默认版）
+- `versionChoices` 对象中每个选项包含：`label`（显示名称）、`version`（版本号/策略）、`note`（免费/付费说明）、`downloadUrl`（下载地址）、`backupUrl`（备用地址）
+- 询问时**必须把每个版本的付费/免费性质、能否联网更新讲清楚**。以 Typora 为例：
+  > "Typora 默认安装**免费版（0.9.98 旧版）**，可直接使用但不能联网更新（更新会变成付费版）。你装哪种？
+  > **A. 免费版 0.9.98（默认）**——旧版，能免费使用，不能更新
+  > **B. 最新版**——付费授权，仅 14 天试用，试用结束需购买
+  > 或直接输入你想装的指定历史版本号"
+- 用户选出后，用该选项的 `downloadUrl`（失败则 `backupUrl`）和 `checkPaths` 作为本次安装配置；若用户指定了配置之外的历史版本，则按用户指定版本配合其可用下载地址处理
+
 ### 3. 获取对应版本
 
 根据确认后的版本策略，查询每个软件的实际下载版本和地址：
@@ -294,7 +355,10 @@ platforms: [WorkBuddy, TraeWork]
   - `github-release`：调用 GitHub API 获取最新 release，按 `assetPattern` 匹配资产并直接使用其 `browser_download_url`
   - `page-regex`：获取 pageUrl 页面源码，按 `pattern` 正则提取版本号，填入 `downloadUrlTemplate` 生成下载地址
 - 策略为用户指定的具体版本号 → 用指定版本号替换下载地址模板中的 `{version}`
+- 多版本选项软件（`hasVersionChoices`）→ 使用用户已选版本的 `downloadUrl` 作为下载地址（若该 URL 下载失败，再尝试其 `backupUrl`）
 - 版本检测失败 → 回退使用配置中的 `downloadUrl` 作为默认值
+
+**下载地址回退顺序**（任意软件）：用户选定的下载地址 → `backupUrl`（若配置）→ 提示用户手动从可信镜像下载。若官方直链经常失败（如 Typora 的 download.typora.io 曾被标注失效），应优先提示用户准备国内镜像/网盘备份。
 
 向用户展示最终的安装版本列表。
 

@@ -15,7 +15,7 @@
 
 ## 包含的软件
 
-当前预置以下 9 款常用软件（可在配置文件中自定义增删）：
+当前预置以下 10 款常用软件（可在配置文件中自定义增删）：
 
 | 软件 | 说明 | 版本获取方式 | 安装方式 | 安装路径 |
 |------|------|-------------|----------|----------|
@@ -28,8 +28,11 @@
 | **TraeWork** | AI 工作助手 | 自动获取（官方重定向） | 用户安装版 | `%LOCALAPPDATA%\Programs\TRAE SOLO CN` |
 | **Everything** | 文件秒搜工具（voidtools） | 自动获取（官网页面解析） | 系统安装版 | `C:\Program Files\Everything` |
 | **Watt Toolkit** | 网络加速工具箱（原 Steam++） | 固定稳定版 3.1.0 | 系统安装版 | `C:\Program Files\Steam++`（可自定义） |
+| **Typora** | Markdown 编辑器 | **默认免费版 0.9.98**（可选最新付费版/指定版本） | 用户安装版 | `C:\Program Files\Typora`（可自定义） |
 
 > Trae 系列为 Electron 应用，官方仅提供用户安装版（安装到用户目录），支持静默自动更新。
+>
+> **Typora**：官方已转为付费授权制。本技能**默认安装官方最后可免费直接使用的旧版 0.9.98**（不是最新版）。安装时明确询问用户选免费版 / 最新版（付费，仅 14 天试用）/ 指定历史版本，并说明"默认免费版是旧版、不能联网更新，最新版要付费"。
 
 ## 环境要求
 
@@ -67,6 +70,8 @@
 | `page-regex` | 解析官网下载页，正则提取最新版本号后拼接下载地址 | Everything |
 
 > **MySQL 特别说明**：MySQL 8.0 后官网停止提供 MySQL Installer，本技能使用官方独立的 MySQL Community Server MSI 直链（固定官方最新 LTS 9.7 版；因 CDN 主版本目录无法由完整版本号推导，采用**手动更新**而非自动检测）。
+>
+> **Typora 特别说明**：Typora 官方已转为付费授权制、无公开版本 API，故采用 `fixed-url` 固定下载地址 + **版本选项（versionChoices）**机制。安装前明确询问用户选"免费版 / 最新版（付费）/ 指定版本"，**默认免费版为官方最后可免费直接使用的旧版 0.9.98**。
 
 ## 目录结构
 
@@ -105,12 +110,18 @@ it-software-installer/            # GitHub 仓库根目录（开源元数据）
 | `name` | string | 软件显示名称 |
 | `version` | string | 版本策略：`latest` / `auto-lts` / `auto-latest` / 具体版本号 |
 | `versionSource` | object | 版本来源配置（见上表策略） |
+| `hasVersionChoices` | boolean | 是否有多个版本选项（如免费版/最新版），可选 |
+| `defaultVersionChoice` | string | 默认版本选项标识（`hasVersionChoices` 为 true 时必填） |
+| `versionChoices` | object | 各版本选项配置，每个含 `label` / `version` / `note` / `downloadUrl` / `backupUrl` |
 | `downloadUrl` | string | 默认下载地址（版本检测失败时回退） |
+| `backupUrl` | string | 可选，备用下载地址（`downloadUrl` 下载失败时回退） |
 | `installerType` | string | `msi` / `exe` |
 | `installArgs` | array | 静默安装参数 |
 | `checkPaths` | array | 检测是否已安装的路径（支持环境变量如 `%LOCALAPPDATA%`） |
 | `requiresAdmin` | boolean | 是否需要管理员权限 |
 | `installScope` | string | `system`（系统安装版）/ `user`（用户安装版） |
+
+> **多版本选项（versionChoices）**：适用于默认安装非最新版的软件（如 Typora 默认免费旧版）。安装时必须先询问用户选哪个版本，并说明各版本付费/免费性质与能否更新。下载地址回退顺序：选定地址 → `backupUrl` → 提示手动从可信镜像下载。
 
 **自定义**：打开 `skill/software-config.json`，按上述结构在 `software[].` 中增删对象即可扩展软件列表。
 

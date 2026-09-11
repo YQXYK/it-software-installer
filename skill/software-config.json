@@ -260,6 +260,53 @@
         "加速功能无需登录即可使用（经用户实测）；仅部分高级功能（如账号管理、库存查看等）才需要登录账号",
         "实测确认：该安装器（Steam++ 自研 Avalonia）不支持命令行静默安装（/S 等标准参数全部无效），安装时会弹出图形向导，需手动选择安装路径并点击『立即安装』完成"
       ]
+    },
+    {
+      "id": "typora",
+      "name": "Typora",
+      "installScope": "user",
+      "version": "0.9.98",
+      "versionSource": {
+        "type": "fixed-url",
+        "note": "Typora 官方最后一个免费版为 0.11.18（打开会提示有效期已过，需配合注册表校验规避）；用户指定默认使用更早的免费版 0.9.98（下载后可直接使用、无需规避）。新版 1.x/2.x 为付费版，仅 14 天试用。版本不自动检测，安装前询问用户选免费版 / 最新版 / 指定版本。"
+      },
+      "hasVersionChoices": true,
+      "defaultVersionChoice": "free",
+      "versionChoices": {
+        "free": {
+          "label": "免费版（0.9.98，旧版，默认）",
+          "version": "0.9.98",
+          "note": "免费旧版，不能联网更新（更新会变成付费版/提示付费）。下载后可直接使用，未经过期校验规避。",
+          "downloadUrl": "https://download.typora.io/windows/typora-update-x64-1213.exe",
+          "backupUrl": ""
+        },
+        "latest": {
+          "label": "最新版（付费，需购买授权，仅 14 天试用）",
+          "version": "latest",
+          "note": "最新正式版本（1.x/2.x），付费授权制。安装后默认 14 天试用期，试用结束后需购买授权码才能继续使用。",
+          "downloadUrl": "https://download.typora.io/windows/typora-setup-x64.exe",
+          "backupUrl": "https://typora.io/"
+        }
+      },
+      "downloadUrl": "https://download.typora.io/windows/typora-update-x64-1213.exe",
+      "backupUrl": "",
+      "installerType": "exe",
+      "installArgs": ["/S"],
+      "checkPaths": [
+        "C:\\Program Files\\Typora\\Typora.exe",
+        "%LOCALAPPDATA%\\Programs\\Typora\\Typora.exe",
+        "D:\\Program Files\\Typora\\Typora.exe"
+      ],
+      "versionCommand": "",
+      "requiresAdmin": false,
+      "installNotes": [
+        "Typora 提供两个版本选项，安装前会先询问用户选择：",
+        "  A. 免费版（0.9.98，默认）：官方最后一个可免费使用的旧版，下载后直接可用；但其为旧版，不能联网更新，更新会变成付费版提示",
+        "  B. 最新版（付费）：需购买授权，仅 14 天试用，试用结束后需付费购买授权码才能继续使用",
+        "  还可让用户直接指定某个历史版本号（如 0.11.18、任意 0.9.x），但需用户自查该版本是否能正常打开（0.11.18 需注册表校验规避过期）",
+        "免费版 0.9.98 的 download.typora.io 官方直链曾被标注可能失效；若下载失败，应提示用户从可信镜像（如网上蓝奏云/夸克网盘备份）手动下载安装包后继续",
+        "Typora 为 Electron 应用，仅提供用户安装版（默认可装到 C:\\Program Files\\Typora，也可以自定义路径）"
+      ]
     }
   ]
 }
