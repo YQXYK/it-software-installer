@@ -1,0 +1,10 @@
+# 临时与缓存文件
+*.tmp
+*.log
+*.swp
+Thumbs.db
+Desktop.ini
+
+# 本地测试产物
+tmp/
+downloads/

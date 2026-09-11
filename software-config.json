@@ -1,0 +1,265 @@
+{
+  "maxConcurrent": 3,
+  "networkMode": "auto",
+  "installScopeDefault": "system",
+  "software": [
+    {
+      "id": "chrome",
+      "name": "Google Chrome",
+      "installScope": "system",
+      "version": "latest",
+      "versionSource": {
+        "type": "fixed-url",
+        "note": "企业版MSI安装包始终为最新稳定版，系统安装版"
+      },
+      "downloadUrl": "https://dl.google.com/dl/chrome/install/googlechromestandaloneenterprise64.msi",
+      "installerType": "msi",
+      "installArgs": ["/quiet", "/norestart"],
+      "checkPaths": [
+        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+      ],
+      "versionCommand": "\"{path}\" --version",
+      "requiresAdmin": true
+    },
+    {
+      "id": "nodejs",
+      "name": "Node.js (LTS)",
+      "installScope": "system",
+      "version": "auto-lts",
+      "versionSource": {
+        "type": "nodejs-api",
+        "apiUrl": "https://nodejs.org/dist/index.json",
+        "channel": "lts",
+        "downloadUrlTemplate": "https://nodejs.org/dist/v{version}/node-v{version}-x64.msi"
+      },
+      "downloadUrl": "https://nodejs.org/dist/v20.18.0/node-v20.18.0-x64.msi",
+      "installerType": "msi",
+      "installArgs": ["/quiet", "/norestart"],
+      "checkPaths": [
+        "C:\\Program Files\\nodejs\\node.exe"
+      ],
+      "versionCommand": "\"{path}\" --version",
+      "requiresAdmin": true
+    },
+    {
+      "id": "git",
+      "name": "Git for Windows",
+      "installScope": "system",
+      "version": "auto-latest",
+      "versionSource": {
+        "type": "github-release",
+        "repo": "git-for-windows/git",
+        "assetPattern": "Git-*-64-bit.exe",
+        "useAssetUrl": true,
+        "note": "从最新 release 的 assets 中按 assetPattern 匹配安装包，直接使用其 browser_download_url，避免拼接 tag 后缀（.windows.N）出错"
+      },
+      "downloadUrl": "https://github.com/git-for-windows/git/releases/download/v2.47.0.windows.1/Git-2.47.0-64-bit.exe",
+      "installerType": "exe",
+      "installArgs": ["/VERYSILENT", "/NORESTART", "/NOCANCEL", "/SP-", "/CLOSEAPPLICATIONS", "/COMPONENTS=icons,ext\\reg\\shellhere,assoc,assoc_sh"],
+      "checkPaths": [
+        "C:\\Program Files\\Git\\bin\\git.exe"
+      ],
+      "versionCommand": "\"{path}\" --version",
+      "requiresAdmin": true
+    },
+    {
+      "id": "vscode",
+      "name": "Visual Studio Code",
+      "installScope": "system",
+      "version": "latest",
+      "versionSource": {
+        "type": "fixed-url",
+        "note": "Visual Studio Code 系统安装版（System Installer），安装到C:\\Program Files"
+      },
+      "downloadUrl": "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64",
+      "installerType": "exe",
+      "installArgs": ["/verysilent", "/norestart", "/mergetasks=!runcode,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath,desktopicon"],
+      "checkPaths": [
+        "C:\\Program Files\\Microsoft VS Code\\Code.exe",
+        "%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe"
+      ],
+      "versionCommand": "\"{path}\" --version",
+      "requiresAdmin": true,
+      "desktopShortcut": {
+        "name": "Visual Studio Code.lnk",
+        "target": "Code.exe"
+      },
+      "installNotes": [
+        "使用系统安装版（安装到C:\\Program Files），需要管理员权限",
+        "若安装过程中出现\"错误5：拒绝访问\"弹窗，一般是开始菜单快捷方式创建失败，不影响软件本身使用",
+        "安装完成后会自动检查并创建桌面快捷方式"
+      ]
+    },
+    {
+      "id": "traecode",
+      "name": "TraeCode",
+      "installScope": "user",
+      "installScopeNote": "Electron应用，仅提供用户安装版（安装到用户目录），自动更新更方便",
+      "version": "latest",
+      "versionSource": {
+        "type": "fixed-url",
+        "note": "TraeCode官方下载地址自动重定向到最新版"
+      },
+      "hasChannels": true,
+      "defaultChannel": "cn",
+      "channels": {
+        "cn": {
+          "label": "国内版",
+          "downloadUrl": "https://trae-cn.tos-cn-beijing.volces.com/cn-stable/latest/TraeCode-Setup.exe",
+          "checkPaths": [
+            "%LOCALAPPDATA%\\Programs\\Trae CN\\Trae CN.exe",
+            "C:\\Program Files\\Trae CN\\Trae CN.exe",
+            "%LOCALAPPDATA%\\Programs\\trae-code\\Trae Code.exe",
+            "C:\\Program Files\\Trae Code\\Trae Code.exe"
+          ]
+        },
+        "global": {
+          "label": "国际版",
+          "downloadUrl": "https://trae.ai/download/code/win/latest",
+          "checkPaths": [
+            "%LOCALAPPDATA%\\Programs\\Trae Code\\Trae Code.exe",
+            "C:\\Program Files\\Trae Code\\Trae Code.exe",
+            "%LOCALAPPDATA%\\Programs\\trae-code\\Trae Code.exe",
+            "C:\\Program Files\\Trae Code\\Trae Code.exe"
+          ]
+        }
+      },
+      "downloadUrl": "https://trae-cn.tos-cn-beijing.volces.com/cn-stable/latest/TraeCode-Setup.exe",
+      "installerType": "exe",
+      "installArgs": ["/S"],
+      "checkPaths": [
+        "%LOCALAPPDATA%\\Programs\\Trae CN\\Trae CN.exe",
+        "C:\\Program Files\\Trae CN\\Trae CN.exe",
+        "%LOCALAPPDATA%\\Programs\\trae-code\\Trae Code.exe",
+        "C:\\Program Files\\Trae Code\\Trae Code.exe"
+      ],
+      "versionCommand": "",
+      "requiresAdmin": false
+    },
+    {
+      "id": "traework",
+      "name": "TraeWork",
+      "installScope": "user",
+      "installScopeNote": "Electron应用，仅提供用户安装版（安装到用户目录），自动更新更方便",
+      "version": "latest",
+      "versionSource": {
+        "type": "fixed-url",
+        "note": "TraeWork官方下载地址自动重定向到最新版"
+      },
+      "hasChannels": true,
+      "defaultChannel": "cn",
+      "channels": {
+        "cn": {
+          "label": "国内版",
+          "downloadUrl": "https://trae-cn.tos-cn-beijing.volces.com/work-cn-stable/latest/TraeWork-Setup.exe",
+          "checkPaths": [
+            "%LOCALAPPDATA%\\Programs\\TRAE SOLO CN\\TRAE SOLO CN.exe",
+            "C:\\Program Files\\TRAE SOLO CN\\TRAE SOLO CN.exe",
+            "%LOCALAPPDATA%\\Programs\\trae-work\\Trae Work.exe",
+            "C:\\Program Files\\Trae Work\\Trae Work.exe"
+          ]
+        },
+        "global": {
+          "label": "国际版",
+          "downloadUrl": "https://trae.ai/download/work/win/latest",
+          "checkPaths": [
+            "%LOCALAPPDATA%\\Programs\\Trae Work\\Trae Work.exe",
+            "C:\\Program Files\\Trae Work\\Trae Work.exe",
+            "%LOCALAPPDATA%\\Programs\\trae-work\\Trae Work.exe",
+            "C:\\Program Files\\Trae Work\\Trae Work.exe"
+          ]
+        }
+      },
+      "downloadUrl": "https://trae-cn.tos-cn-beijing.volces.com/work-cn-stable/latest/TraeWork-Setup.exe",
+      "installerType": "exe",
+      "installArgs": ["/S"],
+      "checkPaths": [
+        "%LOCALAPPDATA%\\Programs\\TRAE SOLO CN\\TRAE SOLO CN.exe",
+        "C:\\Program Files\\TRAE SOLO CN\\TRAE SOLO CN.exe",
+        "%LOCALAPPDATA%\\Programs\\trae-work\\Trae Work.exe",
+        "C:\\Program Files\\Trae Work\\Trae Work.exe"
+      ],
+      "versionCommand": "",
+      "requiresAdmin": false
+    },
+    {
+      "id": "everything",
+      "name": "Everything",
+      "installScope": "system",
+      "version": "auto-latest",
+      "versionSource": {
+        "type": "page-regex",
+        "pageUrl": "https://www.voidtools.com/downloads/",
+        "pattern": "Everything-([0-9.]+)\\.x64-Setup\\.exe",
+        "downloadUrlTemplate": "https://www.voidtools.com/Everything-{version}.x64.msi",
+        "note": "解析官网下载页首个 x64-Setup 链接得到最新稳定版版本号（页面首个版本区块为稳定版，Beta 排在其后），再拼出对应 x64 MSI 地址"
+      },
+      "downloadUrl": "https://www.voidtools.com/Everything-1.4.1.1032.x64.msi",
+      "installerType": "msi",
+      "installArgs": ["/quiet", "/norestart"],
+      "checkPaths": [
+        "C:\\Program Files\\Everything\\Everything.exe",
+        "C:\\Program Files (x86)\\Everything\\Everything.exe",
+        "%LOCALAPPDATA%\\Programs\\Everything\\Everything.exe"
+      ],
+      "versionCommand": "",
+      "requiresAdmin": true
+    },
+    {
+      "id": "mysql",
+      "name": "MySQL Server",
+      "installScope": "system",
+      "version": "9.7.2",
+      "versionSource": {
+        "type": "fixed-url",
+        "note": "官方最新 LTS 长期支持版 9.7.2。MySQL 8.0 后官网停止提供 MySQL Installer，需用独立的 MySQL Community Server MSI；CDN 直链为 cdn.mysql.com/Downloads/MySQL-{主版本}/mysql-{完整版本}-winx64.msi（主版本目录不可由完整版本直接推导），故采用固定最新 LTS 版本，升级需手动更新此地址"
+      },
+      "downloadUrl": "https://cdn.mysql.com/Downloads/MySQL-9.7/mysql-9.7.2-winx64.msi",
+      "installerType": "msi",
+      "installArgs": ["/quiet", "/norestart"],
+      "checkPaths": [
+        "C:\\Program Files\\MySQL\\MySQL Server 9.7\\bin\\mysqld.exe",
+        "C:\\Program Files\\MySQL\\MySQL Server 8.4\\bin\\mysqld.exe"
+      ],
+      "versionCommand": "",
+      "requiresAdmin": true,
+      "installNotes": [
+        "系统安装版，需管理员权限，默认安装到 C:\\Program Files\\MySQL\\MySQL Server 9.7",
+        "MSI 仅安装 MySQL Server 本体，不会启动服务；安装完成后需手动运行配套的『MySQL Configurator』完成实例初始化（设置 root 密码、注册 Windows 服务、配置端口等）",
+        "安装前需确保系统已安装 Microsoft Visual C++ 2019 Redistributable（无则安装后 MySQL 无法运行）"
+      ]
+    },
+    {
+      "id": "watt-toolkit",
+      "name": "Watt Toolkit",
+      "installScope": "system",
+      "version": "3.1.0",
+      "versionSource": {
+        "type": "fixed-url",
+        "note": "固定到最新稳定正式版 3.1.0。注意：GitHub 的 releases/latest 接口会返回候选版 3.0.0-rc.16（该版本官方注明数字签名到期、可能被杀毒软件误报），无法自动跟随稳定版，故采用固定稳定版本号，升级需手动更新此地址"
+      },
+      "downloadUrl": "https://github.com/BeyondDimension/SteamTools/releases/download/3.1.0/Steam%2B%2B_v3.1.0_win_x64.exe",
+      "installerType": "exe",
+      "installArgs": [],
+      "checkPaths": [
+        "D:\\Program Files\\Steam++\\Steam++.exe",
+        "C:\\Program Files\\Steam++\\Steam++.exe",
+        "C:\\Program Files (x86)\\Steam++\\Steam++.exe",
+        "C:\\Program Files\\WattToolkit\\Steam++.exe"
+      ],
+      "versionCommand": "",
+      "requiresAdmin": true,
+      "desktopShortcut": {
+        "name": "Watt Toolkit.lnk",
+        "target": "Steam++.exe"
+      },
+      "installNotes": [
+        "系统安装版，需管理员权限。实际安装目录为 Steam++（非 WattToolkit），可在向导中自定义到非系统盘（如 D:\\Program Files\\Steam++），主程序 Steam++.exe",
+        "稳定正式版固定为 3.1.0（GitHub latest 接口会返回候选版，故不能自动跟随稳定版，升级需手动更新 version 与 downloadUrl）",
+        "加速功能无需登录即可使用（经用户实测）；仅部分高级功能（如账号管理、库存查看等）才需要登录账号",
+        "实测确认：该安装器（Steam++ 自研 Avalonia）不支持命令行静默安装（/S 等标准参数全部无效），安装时会弹出图形向导，需手动选择安装路径并点击『立即安装』完成"
+      ]
+    }
+  ]
+}
