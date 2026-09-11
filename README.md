@@ -10,7 +10,7 @@
 - ✅ **自动检测已安装软件**：已安装则跳过，不重复安装
 - 🚀 **支持并发安装**：默认最多并行安装 3 个软件，节省时间
 - 📦 **默认系统安装版**：优先安装到 `C:\Program Files`，路径规范、便于管理
-- 🧩 **高度可配置**：`software-config.json` 可增删软件、自定义版本源与安装参数
+- 🧩 **高度可配置**：`skill/software-config.json` 可增删软件、自定义版本源与安装参数
 - 🔁 **可复用**：在 WorkBuddy、TraeWork 中一句话即可触发
 
 ## 包含的软件
@@ -54,8 +54,8 @@
 
 ### 安装后的特殊步骤
 
-- **MySQL**：MSI 仅安装 Server 本体，需手动运行配套 **MySQL Configurator** 完成实例配置。新手请对照 [《MySQL 配置向导小白指南》](../docs/mysql-config-guide.md) 操作。
-- **Watt Toolkit**：官方安装器不支持静默安装，技能会启动图形向导，请对照 [《Watt Toolkit 安装指引》](../docs/watt-toolkit-install-guide.md) 手动完成。网络加速功能无需登录即可使用（部分高级功能才需登录）。
+- **MySQL**：MSI 仅安装 Server 本体，需手动运行配套 **MySQL Configurator** 完成实例配置。新手请对照 [《MySQL 配置向导小白指南》](./skill/docs/mysql-config-guide.md) 操作。
+- **Watt Toolkit**：官方安装器不支持静默安装，技能会启动图形向导，请对照 [《Watt Toolkit 安装指引》](./skill/docs/watt-toolkit-install-guide.md) 手动完成。网络加速功能无需登录即可使用（部分高级功能才需登录）。
 
 ## 自动版本检测策略
 
@@ -71,22 +71,23 @@
 ## 目录结构
 
 ```
-it-software-installer/
-├── SKILL.md                      # 技能定义与使用说明
-├── software-config.json          # 软件列表与安装配置（可自定义）
-├── .gitignore
-├── docs/
-│   ├── mysql-config-guide.md     # MySQL 配置向导小白指南
-│   └── watt-toolkit-install-guide.md  # Watt Toolkit 安装指引
-└── meta/
-    ├── README.md                 # 开源说明（本文件）
-    ├── CHANGELOG.md              # 更新日志
-    └── LICENSE                   # 开源许可（MIT）
+it-software-installer/            # GitHub 仓库根目录（开源元数据）
+├── README.md                     # 开源说明（本文件）
+├── CHANGELOG.md                  # 更新日志
+├── LICENSE                       # 开源许可（MIT）
+└── skill/                        # ★ WorkBuddy 发布包（压缩本目录即可发布）
+    ├── SKILL.md                  # 技能定义与使用说明
+    ├── software-config.json      # 软件列表与安装配置（可自定义）
+    └── docs/
+        ├── mysql-config-guide.md # MySQL 配置向导小白指南
+        └── watt-toolkit-install-guide.md  # Watt Toolkit 安装指引
 ```
+
+> **发布到 WorkBuddy**：仅需将 `skill/` 文件夹压缩为 zip（或按平台要求导入该目录）即可，仓库根目录的 README / LICENSE / CHANGELOG 为 GitHub 开源展示所用，勿打包进 WorkBuddy 发布包。
 
 ## 配置说明
 
-配置文件 `software-config.json` 结构：
+配置文件 `skill/software-config.json` 结构：
 
 ```json
 {
@@ -111,7 +112,7 @@ it-software-installer/
 | `requiresAdmin` | boolean | 是否需要管理员权限 |
 | `installScope` | string | `system`（系统安装版）/ `user`（用户安装版） |
 
-**自定义**：按上述结构在 `software[].` 中增删对象即可扩展软件列表。
+**自定义**：打开 `skill/software-config.json`，按上述结构在 `software[].` 中增删对象即可扩展软件列表。
 
 ## 更新日志
 

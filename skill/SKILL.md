@@ -17,7 +17,7 @@ platforms: [WorkBuddy, TraeWork]
 
 > ⚠️ **平台说明**：本技能及其安装流程**仅经过 Windows（Windows 10 / 11 x64）测试并验证**；其他系统（如 Linux、macOS）**未测试，不保证可用**。
 
-> 版本更新记录见 [CHANGELOG.md](./meta/CHANGELOG.md)
+> 版本更新记录见 [CHANGELOG.md](../CHANGELOG.md)
 
 > **💡 MySQL 配置指引**：安装完 MySQL 后需手动运行 MySQL Configurator 完成实例配置，新手请对照 [《MySQL 配置向导小白指南》](./docs/mysql-config-guide.md) 逐步操作。
 
