@@ -8,6 +8,7 @@ description_en: "One-click installer for common IT software. Automatically fetch
 version: 1.9.2
 author: 雨轻霄
 category: 工具
+icon: ./icon.jpg
 platforms: [WorkBuddy, TraeWork]
 ---
 
