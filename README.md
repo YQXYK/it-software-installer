@@ -10,7 +10,7 @@
 - ✅ **自动检测已安装软件**：已安装则跳过，不重复安装
 - 🚀 **支持并发安装**：默认最多并行安装 3 个软件，节省时间
 - 📦 **默认系统安装版**：优先安装到 `C:\Program Files`，路径规范、便于管理
-- 🧩 **高度可配置**：`skill/software-config.json` 可增删软件、自定义版本源与安装参数
+- 🧩 **高度可配置**：`it-software-installer/software-config.json` 可增删软件、自定义版本源与安装参数
 - 🔁 **可复用**：在 WorkBuddy、TraeWork 中一句话即可触发
 
 ## 包含的软件
@@ -57,8 +57,8 @@
 
 ### 安装后的特殊步骤
 
-- **MySQL**：MSI 仅安装 Server 本体，需手动运行配套 **MySQL Configurator** 完成实例配置。新手请对照 [《MySQL 配置向导小白指南》](./skill/docs/mysql-config-guide.md) 操作。
-- **Watt Toolkit**：官方安装器不支持静默安装，技能会启动图形向导，请对照 [《Watt Toolkit 安装指引》](./skill/docs/watt-toolkit-install-guide.md) 手动完成。网络加速功能无需登录即可使用（部分高级功能才需登录）。
+- **MySQL**：MSI 仅安装 Server 本体，需手动运行配套 **MySQL Configurator** 完成实例配置。新手请对照 [《MySQL 配置向导小白指南》](./it-software-installer/references/mysql-config-guide.md) 操作。
+- **Watt Toolkit**：官方安装器不支持静默安装，技能会启动图形向导，请对照 [《Watt Toolkit 安装指引》](./it-software-installer/references/watt-toolkit-install-guide.md) 手动完成。网络加速功能无需登录即可使用（部分高级功能才需登录）。
 
 ## 自动版本检测策略
 
@@ -80,19 +80,21 @@ it-software-installer/            # GitHub 仓库根目录（开源元数据）
 ├── README.md                     # 开源说明（本文件）
 ├── CHANGELOG.md                  # 更新日志
 ├── LICENSE                       # 开源许可（MIT）
-└── skill/                        # ★ WorkBuddy 发布包（压缩本目录即可发布）
+└── it-software-installer/        # ★ WorkBuddy 技能目录（压缩本目录即可发布）
     ├── SKILL.md                  # 技能定义与使用说明
     ├── software-config.json      # 软件列表与安装配置（可自定义）
-    └── docs/
+    └── references/               # 参考资料（官方规范子资源目录）
         ├── mysql-config-guide.md # MySQL 配置向导小白指南
         └── watt-toolkit-install-guide.md  # Watt Toolkit 安装指引
 ```
 
-> **发布到 WorkBuddy**：仅需将 `skill/` 文件夹压缩为 zip（或按平台要求导入该目录）即可，仓库根目录的 README / LICENSE / CHANGELOG 为 GitHub 开源展示所用，勿打包进 WorkBuddy 发布包。
+> **发布到 WorkBuddy 技能市场**：按[官方技能文档](https://open.workbuddy.cn/docs/skill)的 `skills/{skill-name}/` 结构，仅需将 `it-software-installer/` 文件夹压缩为 zip 上传（平台会将其置于 skills/ 目录下）。仓库根目录的 README / LICENSE / CHANGELOG 为 GitHub 开源展示所用，勿打包进 WorkBuddy 发布包。
+>
+> 技能目录内的 `references/` 为官方规范的参考资料子目录，SKILL.md 通过 `@references/xxx.md` 语法引用。
 
 ## 配置说明
 
-配置文件 `skill/software-config.json` 结构：
+配置文件 `it-software-installer/software-config.json` 结构：
 
 ```json
 {
@@ -123,7 +125,7 @@ it-software-installer/            # GitHub 仓库根目录（开源元数据）
 
 > **多版本选项（versionChoices）**：适用于默认安装非最新版的软件（如 Typora 默认免费旧版）。安装时必须先询问用户选哪个版本，并说明各版本付费/免费性质与能否更新。下载地址回退顺序：选定地址 → `backupUrl` → 提示手动从可信镜像下载。
 
-**自定义**：打开 `skill/software-config.json`，按上述结构在 `software[].` 中增删对象即可扩展软件列表。
+**自定义**：打开 `it-software-installer/software-config.json`，按上述结构在 `software[].` 中增删对象即可扩展软件列表。
 
 ## 更新日志
 

@@ -5,7 +5,7 @@ display_name_en: IT Software One-Click Installer
 description: "IT常用软件一键安装：批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、Typora、TraeCode、TraeWork等常用工具，自动获取最新版本并检测已安装软件，支持并发安装。当用户需要批量安装常用软件或配置开发环境时调用。"
 description_zh: "IT常用软件一键安装：自动获取最新版本，检测已装软件，批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、Typora、TraeCode、TraeWork等常用工具，支持并发安装，快速完成开发环境配置。"
 description_en: "One-click installer for common IT software. Automatically fetches the latest versions, detects already-installed programs, and batch-installs Chrome, Node.js, Git, Visual Studio Code, MySQL Server, Watt Toolkit, Typora, TraeCode and TraeWork with concurrent downloads. Use when users need to install common software in bulk or set up a development environment."
-version: 1.9.0
+version: 1.9.2
 author: 雨轻霄
 category: 工具
 platforms: [WorkBuddy, TraeWork]
@@ -17,11 +17,11 @@ platforms: [WorkBuddy, TraeWork]
 
 > ⚠️ **平台说明**：本技能及其安装流程**仅经过 Windows（Windows 10 / 11 x64）测试并验证**；其他系统（如 Linux、macOS）**未测试，不保证可用**。
 
-> 版本更新记录见 [CHANGELOG.md](../CHANGELOG.md)
+> 版本更新记录见 [CHANGELOG.md](../CHANGELOG.md)（仓库根目录）
 
-> **💡 MySQL 配置指引**：安装完 MySQL 后需手动运行 MySQL Configurator 完成实例配置，新手请对照 [《MySQL 配置向导小白指南》](./docs/mysql-config-guide.md) 逐步操作。
+> **💡 MySQL 配置指引**：安装完 MySQL 后需手动运行 MySQL Configurator 完成实例配置，新手请对照《MySQL 配置向导小白指南》@references/mysql-config-guide.md 逐步操作。
 
-> **💡 Watt Toolkit 安装指引**：Watt Toolkit 官方安装器不支持静默安装，技能会启动图形向导，请对照 [《Watt Toolkit 安装指引》](./docs/watt-toolkit-install-guide.md) 手动完成。
+> **💡 Watt Toolkit 安装指引**：Watt Toolkit 官方安装器不支持静默安装，技能会启动图形向导，请对照《Watt Toolkit 安装指引》@references/watt-toolkit-install-guide.md 手动完成。
 
 ## 设计原则
 
@@ -88,7 +88,7 @@ platforms: [WorkBuddy, TraeWork]
 
 ## 配置文件
 
-配置文件路径：`.trae/skills/it-software-installer/software-config.json`
+配置文件路径：本技能目录下的 `software-config.json`（与 SKILL.md 同目录）。
 
 配置结构：
 ```json
@@ -295,14 +295,17 @@ platforms: [WorkBuddy, TraeWork]
 
 ### 2. 选项式询问版本偏好与发行渠道
 
-用选项式的方式向用户确认安装配置，方便用户快速选择：
+用**选项式**的方式向用户确认安装配置。**必须使用可点击的选项组件（选项式提问/选择题控件）来让用户直接点选，而不是把字母写在正文里让用户手动打字回答**。选项组件应包含：
 
-> "以上是配置中的全部软件，默认会安装各软件的最新推荐版本。请选择：
->
-> **A. 全部按默认配置安装**（推荐，最新版 + 国内版）
-> **B. 我要调整个别软件的版本或渠道**
-> **C. 我要选择部分软件安装**
-> **D. 取消安装**"
+```
+以上是配置中的全部软件，默认会安装各软件的最新推荐版本。请选择：
+- A. 全部按默认配置安装（推荐，最新版 + 国内版）
+- B. 我要调整个别软件的版本或渠道
+- C. 我要选择部分软件安装
+- D. 取消安装
+```
+
+> **交互硬性要求**：所有需要用户做出选择的环节（A/B/C/D 主流程、版本选项、渠道选择、安装位置确认），一律用**可点击的选项组件**呈现，让用户用鼠标点选即可；**禁止**仅输出字母选项让用户手动打字输入。当前支持点击选择时默认推荐第一项（"全部按默认配置安装"）。
 
 根据用户选择的选项处理：
 
@@ -312,17 +315,17 @@ platforms: [WorkBuddy, TraeWork]
 - 其余软件直接进入第 3 步
 
 **选项 B — 调整版本/渠道**：
-- 进一步询问："你要调整哪个软件？（输入序号或名称）"
-- 用户指定软件后，询问具体调整：
-  - 版本："你要安装哪个版本？（输入版本号，或直接回车用最新版）"
-  - 渠道（仅多渠道软件）："国内版还是国际版？（国内版/国际版）"
-- 调整完一个后，问"还要调整其他软件吗？"
+- 进一步询问（用可点击选项组件列出待装软件序号与名称）："你要调整哪个软件？"，让用户点选软件（可多选）
+- 用户点选软件后，逐个询问具体调整（同样用可点击选项，如版本类型、国内版/国际版）：
+  - 版本："你要安装哪个版本？"（给出"最新版""指定版本号"等可点击选项；选指定版本号时再由用户输入具体号）
+  - 渠道（仅多渠道软件）："国内版还是国际版？"（可点击：国内版 / 国际版）
+- 调整完一个后，用可点击选项问"还要调整其他软件吗？"（是 / 否）
 - 全部调整完后进入第 3 步
 
 **选项 C — 选择部分软件**：
-- 进一步询问："请输入你要安装的软件序号，用空格或逗号分隔（如：1 3 5）"
-- 解析用户输入，只保留选中的软件
-- 然后问"版本和渠道需要调整吗？" → 需要则走选项 B 的流程，不需要则进入第 3 步
+- 用可点击选项组件列出全部软件供多选，让用户**勾选**要安装的软件，而不是手动输入序号
+- 解析勾选结果，只保留选中的软件
+- 然后用可点击选项问"版本和渠道需要调整吗？"（是 / 否）→ 需要则走选项 B 的流程，不需要则进入第 3 步
 
 **选项 D — 取消**：
 - 结束技能，不执行安装
@@ -339,11 +342,11 @@ platforms: [WorkBuddy, TraeWork]
 - 配置中 `hasVersionChoices: true` 的软件（如 Typora）提供多个版本选项，**安装前必须明确询问用户选择哪个版本**
 - `defaultVersionChoice` 指定默认版本选项（通常为免费版/默认版）
 - `versionChoices` 对象中每个选项包含：`label`（显示名称）、`version`（版本号/策略）、`note`（免费/付费说明）、`downloadUrl`（下载地址）、`backupUrl`（备用地址）
-- 询问时**必须把每个版本的付费/免费性质、能否联网更新讲清楚**。以 Typora 为例：
+- 询问（用可点击选项组件呈现每个版本选项）时**必须把每个版本的付费/免费性质、能否联网更新讲清楚**。以 Typora 为例（可点击选项）：
   > "Typora 默认安装**免费版（0.9.98 旧版）**，可直接使用但不能联网更新（更新会变成付费版）。你装哪种？
-  > **A. 免费版 0.9.98（默认）**——旧版，能免费使用，不能更新
-  > **B. 最新版**——付费授权，仅 14 天试用，试用结束需购买
-  > 或直接输入你想装的指定历史版本号"
+  > - 免费版 0.9.98（默认）——旧版，能免费使用，不能更新
+  > - 最新版——付费授权，仅 14 天试用，试用结束需购买"
+  > 用户也可要求指定任意历史版本号（此时由用户在输入框中填写）
 - 用户选出后，用该选项的 `downloadUrl`（失败则 `backupUrl`）和 `checkPaths` 作为本次安装配置；若用户指定了配置之外的历史版本，则按用户指定版本配合其可用下载地址处理
 
 ### 3. 获取对应版本
@@ -400,10 +403,10 @@ platforms: [WorkBuddy, TraeWork]
 
 ### 6. 确认安装位置（先询问，再安装）
 
-在开始下载安装前，**必须先询问用户**：待安装软件装到默认系统盘（`C:\Program Files`），还是用户指定的位置。
+在开始下载安装前，**必须先询问用户**：待安装软件装到默认系统盘（`C:\Program Files`），还是用户指定的位置。此询问用**可点击选项组件**呈现。
 
-- **A 全部按默认安装时**：统一询问一次"默认装到系统盘（`C:\Program Files`），需要改到其他盘或指定目录吗？"，如需指定位置请用户提供目标目录。
-- **B/C 选择部分软件时**：一并询问"这些软件装默认盘，还是你指定位置？"。支持自定义路径的软件（如 Watt Toolkit、Everything、Trae 系列）可让用户填写目标目录（如 `D:\xxx`）。
+- **A 全部按默认安装时**：用可点击选项统一询问一次"默认装到系统盘（`C:\Program Files`），需要改到其他盘或指定目录吗？"（选项：保持默认 / 指定其他位置）；选"指定其他位置"时再让用户提供目标目录（可输入框填写）。
+- **B/C 选择部分软件时**：一并询问"这些软件装默认盘，还是你指定位置？"（可点击选项）。支持自定义路径的软件（如 Watt Toolkit、Everything、Trae 系列）可让用户填写目标目录（如 `D:\xxx`）。
 - 记录用户确认的安装位置；指定了非默认目录的软件，安装时按该目录执行（配置安装参数，或在安装器向导中手动指定），并在后续验证时优先使用该实际路径。
 - **无法用命令行指定路径的软件**（如 Watt Toolkit 的半自动 GUI 安装）：提示用户在安装向导的路径选择处手动改到目标目录，并记下该位置用于验证。
 
