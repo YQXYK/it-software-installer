@@ -2,10 +2,10 @@
 name: it-software-installer
 display_name: IT常用软件一键安装
 display_name_en: IT Software One-Click Installer
-description: "IT常用软件一键安装：批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、Typora、TraeCode、TraeWork等常用工具，自动获取最新版本并检测已安装软件，支持并发安装。当用户需要批量安装常用软件或配置开发环境时调用。"
-description_zh: "IT常用软件一键安装：自动获取最新版本，检测已装软件，批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、Typora、TraeCode、TraeWork等常用工具，支持并发安装，快速完成开发环境配置。"
-description_en: "One-click installer for common IT software. Automatically fetches the latest versions, detects already-installed programs, and batch-installs Chrome, Node.js, Git, Visual Studio Code, MySQL Server, Watt Toolkit, Typora, TraeCode and TraeWork with concurrent downloads. Use when users need to install common software in bulk or set up a development environment."
-version: 1.9.2
+description: "IT常用软件一键安装：批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、Typora、TRAE等常用工具，自动获取最新版本并检测已安装软件，支持并发安装。当用户需要批量安装常用软件或配置开发环境时调用。"
+description_zh: "IT常用软件一键安装：自动获取最新版本，检测已装软件，批量安装Chrome、Node.js、Git、Visual Studio Code、MySQL Server、Watt Toolkit、Typora、TRAE等常用工具，支持并发安装，快速完成开发环境配置。"
+description_en: "One-click installer for common IT software. Automatically fetches the latest versions, detects already-installed programs, and batch-installs Chrome, Node.js, Git, Visual Studio Code, MySQL Server, Watt Toolkit, Typora and TRAE with concurrent downloads. Use when users need to install common software in bulk or set up a development environment."
+version: 1.9.3
 author: 雨轻霄
 category: 工具
 icon: ./icon.jpg
@@ -30,7 +30,7 @@ platforms: [WorkBuddy, TraeWork]
 
 ## 包含的软件
 
-当前预置以下 10 款常用软件（可在配置文件中自定义增删）：
+当前预置以下 9 款常用软件（可在配置文件中自定义增删）：
 
 | 软件 | 说明 | 版本获取方式 | 安装方式 | 安装路径 | 发行渠道 |
 |------|------|-------------|----------|----------|----------|
@@ -39,13 +39,12 @@ platforms: [WorkBuddy, TraeWork]
 | **Git for Windows** | 版本控制工具 | 自动获取（GitHub Releases） | 系统安装版 | `C:\Program Files\Git` | - |
 | **Visual Studio Code** | 代码编辑器 | 自动获取（官方重定向） | 系统安装版 | `C:\Program Files\Microsoft VS Code` | - |
 | **MySQL Server (LTS)** | 关系型数据库 | LTS 固定版（官方CDN直链） | 系统安装版 | `C:\Program Files\MySQL\MySQL Server 9.7` | - |
-| **TraeCode** | AI 编程助手 | 自动获取（官方重定向） | 用户安装版 | `%LOCALAPPDATA%\Programs\Trae CN` | 国内版 / 国际版 |
-| **TraeWork** | AI 工作助手 | 自动获取（官方重定向） | 用户安装版 | `%LOCALAPPDATA%\Programs\TRAE SOLO CN` | 国内版 / 国际版 |
+| **TRAE** | AI 一体化开发平台（Agent/IDE 融合） | 固定版 2.3.90452（官方CDN直链，手动更新） | 用户安装版 | `%LOCALAPPDATA%\Programs\Trae CN` | 国内版 / 国际版 |
 | **Everything** | 文件秒搜工具（voidtools） | 自动获取（官网页面解析） | 系统安装版 | `C:\Program Files\Everything` | - |
 | **Watt Toolkit** | 网络加速工具箱（原 Steam++） | 固定稳定版 3.1.0（GitHub latest 接口返回候选版） | 系统安装版 | `C:\Program Files\Steam++`（可自定义） | - |
 | **Typora** | Markdown 编辑器 | 默认免费版 0.9.98（可选最新付费版/指定版本） | 用户安装版 | `C:\Program Files\Typora`（可自定义） | 版本选项 |
 
-> Trae 系列为 Electron 应用，官方仅提供用户安装版（安装到用户目录），支持静默自动更新，使用体验更佳。
+> TRAE 为一体化的 Electron 应用，官方仅提供用户安装版（安装到用户目录），支持静默自动更新，使用体验更佳。
 
 > **💡 Typora 特别说明**：Typora 官方已转为付费授权制，其免费版固定在旧版本。本技能**默认安装官方最后可免费直接使用的旧版 0.9.98**（而不是最新版）。安装时会明确询问用户装哪种：
 > - **A. 免费版（默认）**：旧版 0.9.98，可直接使用，但**不能联网更新**（更新会变成付费版/提示付费）；
@@ -66,7 +65,7 @@ platforms: [WorkBuddy, TraeWork]
 
 | 策略类型 | 说明 | 适用软件 |
 |----------|------|----------|
-| `fixed-url` | 下载链接本身就是最新版地址（重定向或固定最新包） | Chrome、Visual Studio Code、TraeCode、TraeWork |
+| `fixed-url` | 下载链接本身就是最新版地址（重定向或固定最新包） | Chrome、Visual Studio Code、TRAE |
 | `nodejs-api` | 通过 Node.js 官方 API 查询最新 LTS 版本 | Node.js |
 | `github-release` | 通过 GitHub Releases API 查询最新发布版本 | Git for Windows |
 | `page-regex` | 解析官网下载页，正则提取最新版本号后拼接下载地址 | Everything |
@@ -291,7 +290,7 @@ platforms: [WorkBuddy, TraeWork]
 |------|------|-------------|----------|------|
 | 1 | Google Chrome | 最新版（自动获取） | - | 谷歌浏览器 |
 | 2 | Node.js (LTS) | 最新LTS版（自动获取） | - | JavaScript 运行时 |
-| 5 | TraeCode | 最新版（自动获取） | 国内版（默认）/ 国际版 | AI 编程助手 |
+| 5 | TRAE | 固定版 2.3.90452（手动更新） | 国内版（默认）/ 国际版 | AI 一体化开发平台 |
 | ... | ... | ... | ... | ... |
 
 ### 2. 选项式询问版本偏好与发行渠道
@@ -370,7 +369,7 @@ platforms: [WorkBuddy, TraeWork]
 
 对每个待安装的软件，遍历 `checkPaths` 检查文件是否存在。**只要有一个路径存在即视为已安装**。
 
-> **重要**：`checkPaths` 应尽可能多地覆盖可能的安装路径（不同版本、不同渠道的安装目录可能不同），按优先级从高到低排列。例如 Trae 系列软件国内版可能安装在 `Trae CN` 或 `TRAE SOLO CN` 等不同目录下。
+> **重要**：`checkPaths` 应尽可能多地覆盖可能的安装路径（不同版本、不同渠道的安装目录可能不同），按优先级从高到低排列。例如 TRAE 国内版可能安装在不同目录下（如 `Trae CN` 等）。
 
 环境变量展开：使用 PowerShell 的 `[Environment]::ExpandEnvironmentVariables()` 处理路径中的 `%VAR%`。
 
@@ -386,7 +385,7 @@ platforms: [WorkBuddy, TraeWork]
 | Google Chrome | 已安装（跳过） | 152.0.7977.83 | - |
 | Node.js | 待安装 | - | v22.11.0 |
 | Git | 待安装 | - | 2.47.0 |
-| TraeCode | 已安装（跳过） | 已安装 | - |
+| TRAE | 已安装（跳过） | 已安装 | - |
 
 ### 5. 确认安装列表并展示注意事项
 
@@ -407,7 +406,7 @@ platforms: [WorkBuddy, TraeWork]
 在开始下载安装前，**必须先询问用户**：待安装软件装到默认系统盘（`C:\Program Files`），还是用户指定的位置。此询问用**可点击选项组件**呈现。
 
 - **A 全部按默认安装时**：用可点击选项统一询问一次"默认装到系统盘（`C:\Program Files`），需要改到其他盘或指定目录吗？"（选项：保持默认 / 指定其他位置）；选"指定其他位置"时再让用户提供目标目录（可输入框填写）。
-- **B/C 选择部分软件时**：一并询问"这些软件装默认盘，还是你指定位置？"（可点击选项）。支持自定义路径的软件（如 Watt Toolkit、Everything、Trae 系列）可让用户填写目标目录（如 `D:\xxx`）。
+- **B/C 选择部分软件时**：一并询问"这些软件装默认盘，还是你指定位置？"（可点击选项）。支持自定义路径的软件（如 Watt Toolkit、Everything、TRAE）可让用户填写目标目录（如 `D:\xxx`）。
 - 记录用户确认的安装位置；指定了非默认目录的软件，安装时按该目录执行（配置安装参数，或在安装器向导中手动指定），并在后续验证时优先使用该实际路径。
 - **无法用命令行指定路径的软件**（如 Watt Toolkit 的半自动 GUI 安装）：提示用户在安装向导的路径选择处手动改到目标目录，并记下该位置用于验证。
 

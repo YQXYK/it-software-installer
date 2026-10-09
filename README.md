@@ -24,13 +24,12 @@
 | **Git for Windows** | 版本控制工具 | 自动获取（GitHub Releases） | 系统安装版 | `C:\Program Files\Git` |
 | **Visual Studio Code** | 代码编辑器 | 自动获取（官方重定向） | 系统安装版 | `C:\Program Files\Microsoft VS Code` |
 | **MySQL Server (LTS)** | 关系型数据库 | LTS 固定版（官方 CDN 直链） | 系统安装版 | `C:\Program Files\MySQL\MySQL Server 9.7` |
-| **TraeCode** | AI 编程助手 | 自动获取（官方重定向） | 用户安装版 | `%LOCALAPPDATA%\Programs\Trae CN` |
-| **TraeWork** | AI 工作助手 | 自动获取（官方重定向） | 用户安装版 | `%LOCALAPPDATA%\Programs\TRAE SOLO CN` |
+| **TRAE** | AI 一体化开发平台（Agent/IDE 融合） | 固定版 2.3.90452（官方 CDN 直链，手动更新） | 用户安装版 | `%LOCALAPPDATA%\Programs\Trae CN` |
 | **Everything** | 文件秒搜工具（voidtools） | 自动获取（官网页面解析） | 系统安装版 | `C:\Program Files\Everything` |
 | **Watt Toolkit** | 网络加速工具箱（原 Steam++） | 固定稳定版 3.1.0 | 系统安装版 | `C:\Program Files\Steam++`（可自定义） |
 | **Typora** | Markdown 编辑器 | **默认免费版 0.9.98**（可选最新付费版/指定版本） | 用户安装版 | `C:\Program Files\Typora`（可自定义） |
 
-> Trae 系列为 Electron 应用，官方仅提供用户安装版（安装到用户目录），支持静默自动更新。
+> TRAE 为一体化的 Electron 应用，官方仅提供用户安装版（安装到用户目录），支持静默自动更新。
 >
 > **Typora**：官方已转为付费授权制。本技能**默认安装官方最后可免费直接使用的旧版 0.9.98**（不是最新版）。安装时明确询问用户选免费版 / 最新版（付费，仅 14 天试用）/ 指定历史版本，并说明"默认免费版是旧版、不能联网更新，最新版要付费"。
 
@@ -64,7 +63,7 @@
 
 | 策略类型 | 说明 | 适用软件 |
 |----------|------|----------|
-| `fixed-url` | 下载链接本身就是最新版地址（重定向或固定最新包） | Chrome、Visual Studio Code、TraeCode、TraeWork |
+| `fixed-url` | 下载链接本身就是最新版地址（重定向或固定最新包） | Chrome、Visual Studio Code、TRAE |
 | `nodejs-api` | 通过 Node.js 官方 API 查询最新 LTS 版本 | Node.js |
 | `github-release` | 通过 GitHub Releases API 查询最新发布版本 | Git for Windows |
 | `page-regex` | 解析官网下载页，正则提取最新版本号后拼接下载地址 | Everything |

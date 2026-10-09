@@ -92,93 +92,48 @@
       ]
     },
     {
-      "id": "traecode",
-      "name": "TraeCode",
+      "id": "trae",
+      "name": "TRAE",
       "installScope": "user",
       "installScopeNote": "Electron应用，仅提供用户安装版（安装到用户目录），自动更新更方便",
-      "version": "latest",
+      "version": "2.3.90452",
       "versionSource": {
         "type": "fixed-url",
-        "note": "TraeCode官方下载地址自动重定向到最新版"
+        "note": "TRAE 已融合升级为一体化平台（Agent/IDE 模式合一），不再区分 TraeCode / TraeWork。官方 CDN 直链含具体版本号且无 latest 重定向地址，新版本发布后需手动更新直链（参照 CHANGELOG/官方更新日志）。安装包：国内版 TRAE_CN-Setup-x64.exe，国际版 TRAE-Setup-x64.exe"
       },
       "hasChannels": true,
       "defaultChannel": "cn",
       "channels": {
         "cn": {
           "label": "国内版",
-          "downloadUrl": "https://trae-cn.tos-cn-beijing.volces.com/cn-stable/latest/TraeCode-Setup.exe",
+          "downloadUrl": "https://lf-cdn.trae.com.cn/obj/trae-com-cn/pkg/app/releases/stable/2.3.90452/win32/TRAE_CN-Setup-x64.exe",
           "checkPaths": [
             "%LOCALAPPDATA%\\Programs\\Trae CN\\Trae CN.exe",
+            "%LOCALAPPDATA%\\Programs\\TRAE CN\\TRAE CN.exe",
             "C:\\Program Files\\Trae CN\\Trae CN.exe",
-            "%LOCALAPPDATA%\\Programs\\trae-code\\Trae Code.exe",
-            "C:\\Program Files\\Trae Code\\Trae Code.exe"
+            "%LOCALAPPDATA%\\Programs\\trae\\Trae.exe"
           ]
         },
         "global": {
           "label": "国际版",
-          "downloadUrl": "https://trae.ai/download/code/win/latest",
+          "downloadUrl": "https://lf-cdn.trae.com.cn/obj/trae-com-cn/pkg/app/releases/stable/2.3.90453/win32/TRAE-Setup-x64.exe",
           "checkPaths": [
-            "%LOCALAPPDATA%\\Programs\\Trae Code\\Trae Code.exe",
-            "C:\\Program Files\\Trae Code\\Trae Code.exe",
-            "%LOCALAPPDATA%\\Programs\\trae-code\\Trae Code.exe",
-            "C:\\Program Files\\Trae Code\\Trae Code.exe"
+            "%LOCALAPPDATA%\\Programs\\Trae\\Trae.exe",
+            "C:\\Program Files\\Trae\\Trae.exe",
+            "%LOCALAPPDATA%\\Programs\\trae\\Trae.exe"
           ]
         }
       },
-      "downloadUrl": "https://trae-cn.tos-cn-beijing.volces.com/cn-stable/latest/TraeCode-Setup.exe",
+      "downloadUrl": "https://lf-cdn.trae.com.cn/obj/trae-com-cn/pkg/app/releases/stable/2.3.90452/win32/TRAE_CN-Setup-x64.exe",
+      "backupUrl": "https://www.trae.cn/ide/download",
       "installerType": "exe",
       "installArgs": ["/S"],
       "checkPaths": [
         "%LOCALAPPDATA%\\Programs\\Trae CN\\Trae CN.exe",
+        "%LOCALAPPDATA%\\Programs\\TRAE CN\\TRAE CN.exe",
         "C:\\Program Files\\Trae CN\\Trae CN.exe",
-        "%LOCALAPPDATA%\\Programs\\trae-code\\Trae Code.exe",
-        "C:\\Program Files\\Trae Code\\Trae Code.exe"
-      ],
-      "versionCommand": "",
-      "requiresAdmin": false
-    },
-    {
-      "id": "traework",
-      "name": "TraeWork",
-      "installScope": "user",
-      "installScopeNote": "Electron应用，仅提供用户安装版（安装到用户目录），自动更新更方便",
-      "version": "latest",
-      "versionSource": {
-        "type": "fixed-url",
-        "note": "TraeWork官方下载地址自动重定向到最新版"
-      },
-      "hasChannels": true,
-      "defaultChannel": "cn",
-      "channels": {
-        "cn": {
-          "label": "国内版",
-          "downloadUrl": "https://trae-cn.tos-cn-beijing.volces.com/work-cn-stable/latest/TraeWork-Setup.exe",
-          "checkPaths": [
-            "%LOCALAPPDATA%\\Programs\\TRAE SOLO CN\\TRAE SOLO CN.exe",
-            "C:\\Program Files\\TRAE SOLO CN\\TRAE SOLO CN.exe",
-            "%LOCALAPPDATA%\\Programs\\trae-work\\Trae Work.exe",
-            "C:\\Program Files\\Trae Work\\Trae Work.exe"
-          ]
-        },
-        "global": {
-          "label": "国际版",
-          "downloadUrl": "https://trae.ai/download/work/win/latest",
-          "checkPaths": [
-            "%LOCALAPPDATA%\\Programs\\Trae Work\\Trae Work.exe",
-            "C:\\Program Files\\Trae Work\\Trae Work.exe",
-            "%LOCALAPPDATA%\\Programs\\trae-work\\Trae Work.exe",
-            "C:\\Program Files\\Trae Work\\Trae Work.exe"
-          ]
-        }
-      },
-      "downloadUrl": "https://trae-cn.tos-cn-beijing.volces.com/work-cn-stable/latest/TraeWork-Setup.exe",
-      "installerType": "exe",
-      "installArgs": ["/S"],
-      "checkPaths": [
-        "%LOCALAPPDATA%\\Programs\\TRAE SOLO CN\\TRAE SOLO CN.exe",
-        "C:\\Program Files\\TRAE SOLO CN\\TRAE SOLO CN.exe",
-        "%LOCALAPPDATA%\\Programs\\trae-work\\Trae Work.exe",
-        "C:\\Program Files\\Trae Work\\Trae Work.exe"
+        "%LOCALAPPDATA%\\Programs\\Trae\\Trae.exe",
+        "%LOCALAPPDATA%\\Programs\\trae\\Trae.exe"
       ],
       "versionCommand": "",
       "requiresAdmin": false
